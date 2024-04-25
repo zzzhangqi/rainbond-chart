@@ -7,7 +7,7 @@
 # 
 #############################################
 
-
+{{- if .Values.Component.rbd_gateway.enable }}
 apiVersion: v1
 items:
 - apiVersion: rainbond.io/v1alpha1
@@ -60,7 +60,9 @@ items:
     {{ else }}
     replicas: 1
     {{- end }}
+{{- end }}
 
+{{- if .Values.Component.rbd_hub.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -111,8 +113,9 @@ items:
     {{ else }}
     replicas: 1
     {{- end }}
+{{- end }}
 
-
+{{- if .Values.Component.metrics_server.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -137,8 +140,9 @@ items:
     {{ else }}
     replicas: 1
     {{- end }}
+{{- end }}
 
-
+{{- if .Values.Component.rbd_mq.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -188,8 +192,9 @@ items:
     {{ else }}
     replicas: 1
     {{- end }}
+{{- end }}
 
-
+{{- if .Values.Component.rbd_resource_proxy.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -235,7 +240,9 @@ items:
     imagePullPolicy: {{ .Values.Cluster.imagePullPolicy }}
     priorityComponent: false
     replicas: 1 
-      
+{{- end }}
+
+{{- if .Values.Component.rbd_webcli.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -285,8 +292,9 @@ items:
     {{ else }}
     replicas: 1
     {{- end }}
+{{- end }}
 
-
+{{- if .Values.Component.dashboard_metrics_scraper.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -309,7 +317,9 @@ items:
     {{ else }}
     replicas: 1
     {{- end }}
+{{- end }}
 
+{{- if .Values.Component.kubernetes_dashboard.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -333,8 +343,9 @@ items:
     {{ else }}
     replicas: 1
     {{- end }}
+{{- end }}
 
-
+{{- if .Values.Component.rbd_monitor.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -376,6 +387,7 @@ items:
     imagePullPolicy: {{ .Values.Cluster.imagePullPolicy }}
     priorityComponent: false
     replicas: 1
+{{- end }}
 
 {{- if and .Values.Cluster.uiDatabase.enable .Values.Cluster.regionDatabase.enable }}
 {{- else }}
@@ -426,7 +438,7 @@ items:
     replicas: 1
 {{- end }}
 
-
+{{- if .Values.Component.rbd_chaos.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -472,8 +484,9 @@ items:
     {{ else }}
     replicas: 1
     {{- end }}
+{{- end }}
 
-
+{{- if .Values.Component.rbd_worker.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -530,8 +543,9 @@ items:
     {{ else }}
     replicas: 1
     {{- end }}
+{{- end }}
 
-
+{{- if .Values.Component.rbd_eventlog.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -577,7 +591,9 @@ items:
     imagePullPolicy: {{ .Values.Cluster.imagePullPolicy }}
     priorityComponent: false
     replicas: 1
+{{- end }}
 
+{{- if .Values.Component.rbd_api.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -627,6 +643,7 @@ items:
     {{ else }}
     replicas: 1
     {{- end }}
+{{- end }}
 
 {{- if .Values.Component.rbd_app_ui.enable }}
 - apiVersion: rainbond.io/v1alpha1
@@ -729,6 +746,7 @@ items:
     replicas: {{ .Values.Cluster.replicas }}
 {{- end }}
 
+{{- if .Values.Component.nfs_provisioner.enable }}
 - apiVersion: rainbond.io/v1alpha1
   kind: RbdComponent
   metadata:
@@ -748,7 +766,7 @@ items:
     imagePullPolicy: {{ .Values.Cluster.imagePullPolicy }}
     priorityComponent: true
     replicas: 1
-
+{{- end }}
 
 kind: List
 metadata:

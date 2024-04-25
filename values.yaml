@@ -20,7 +20,7 @@ rbac:
 ## Service account name and whether to create it
 serviceAccount:
   create: true
-  name: rainbond-operator
+  name: appstore-operator
 
 # Use K3s Containerd
 useK3sContainerd: false
@@ -58,15 +58,6 @@ Cluster:
     namespace: rainbond
     password: admin
     username: admin
-
-  # external ETCD, ref: https://www.rainbond.com/docs/installation/ha-deployment/overview/#%E5%85%AB%E5%A4%8D%E7%94%A8-kubernetes-etcd
-  etcd:
-    enable: false
-    endpoints: 
-    - 192.168.0.1:2379 
-    - 192.168.0.2:2379
-    - 192.168.0.3:2379
-    secretName: "rbd-etcd-secret"
 
   # External storage, fill storageClassName, ref: https://www.rainbond.com/docs/installation/install-with-helm/vaules-config#%E9%85%8D%E7%BD%AE%E5%A4%96%E9%83%A8%E5%AD%98%E5%82%A8
   RWX:
@@ -127,7 +118,7 @@ Cluster:
   imagePullPolicy: IfNotPresent
 
   # Number of component copies, ref: https://www.rainbond.com/docs/installation/install-with-helm/vaules-config/#%E9%85%8D%E7%BD%AE%E9%9B%86%E7%BE%A4%E5%89%AF%E6%9C%AC
-  replicas: 2
+  replicas: 1
  
 
 
@@ -140,6 +131,7 @@ Component:
   # ref: https://www.rainbond.com/docs/installation/install-with-helm/vaules-config#%E9%85%8D%E7%BD%AE-rbd-api-%E5%8F%82%E6%95%B0
   # ref: ref: https://www.rainbond.com/docs/ops-guide/management/change-ports
   rbd_api:
+    enable: true
     args:
     # - --api-addr-ssl 0.0.0.0:8443
     # - --ws-addr 0.0.0.0:6060
@@ -148,32 +140,34 @@ Component:
   # ref: https://www.rainbond.com/docs/installation/install-with-helm/vaules-config#%E9%85%8D%E7%BD%AE-rbd-gateway-%E5%8F%82%E6%95%B0
   # ref: ref: https://www.rainbond.com/docs/ops-guide/management/change-ports
   rbd_gateway:
+    enable: true
     args:
     # - --service-http-port 80
     # - --service-https-port 443
-  
-  # rbd-node component configuration
-  rbd_node:
-    args:
 
   # rbd-hub component configuration
   rbd_hub:
+    enable: true
     args:
   
   # rbd-mq component configuration
   rbd_mq:
+    enable: true
     args:
 
   # rbd-resource-proxy component configuration  
   rbd_resource_proxy:
+    enable: true
     args:
   
   # rbd-webcli component configuration  
   rbd_webcli:
+    enable: true
     args:
 
   # rbd-monitor component configuration    
   rbd_monitor:
+    enable: true
     args:
   
   # rbd-db component configuration
@@ -182,14 +176,17 @@ Component:
 
   # rbd-chaos component configuration
   rbd_chaos:
+    enable: true
     args:
 
   # rbd-worker component configuration
   rbd_worker:
+    enable: true
     args:
 
   # rbd-eventlog component configuration
   rbd_eventlog:
+    enable: true
     args:
   
   # rbd-app-ui component configuration
@@ -199,23 +196,23 @@ Component:
 
   # nfs-provisioner component configuration
   nfs_provisioner:
-    image:
-
-  # rbd-etcd component configuration
-  rbd_etcd:
+    enable: true
     image:
 
   # metrics-server component configuration
   metrics_server:
+    enable: false
     image:
 
   # dashboard-metrics-scraper component configuration
   dashboard_metrics_scraper:
+    enable: false
     image:
 
 
   # kubernetes-dashboard component configuration
   kubernetes_dashboard:
+    enable: false
     image:
 
 ## Enable nfs chart, default is false
