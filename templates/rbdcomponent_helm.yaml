@@ -372,7 +372,7 @@ items:
 {{ $value | toYaml |indent 6}}
     {{- end }}  
     {{- end }}
-    image: registry.cn-hangzhou.aliyuncs.com/goodrain/rbd-monitor:v2.20.0
+    image: {{ .Values.Cluster.rainbondImageRepository }}/rbd-monitor:v2.20.0
     imagePullPolicy: {{ .Values.Cluster.imagePullPolicy }}
     priorityComponent: false
     replicas: 1
@@ -671,11 +671,11 @@ items:
     {{- if .Values.Component.rbd_app_ui.image }}
     image: {{ .Values.Component.rbd_app_ui.image }}
     {{- else }}
-    image: {{ .Values.Cluster.rainbondImageRepository }}/rainbond:{{ .Values.Cluster.installVersion }}-allinone
+    image: {{ .Values.Cluster.rainbondImageRepository }}/rainbond:{{ .Values.Cluster.installVersion }}-user-allinone
     {{- end }}
     imagePullPolicy: {{ .Values.Cluster.imagePullPolicy }}
     priorityComponent: false
-    replicas: 1
+    replicas: {{ .Values.Cluster.replicas }}
 {{- end }}
 
 
@@ -722,11 +722,11 @@ items:
     {{- if .Values.Component.rbd_app_ui.image }}
     image: {{ .Values.Component.rbd_app_ui.image }}
     {{- else }}
-    image: {{ .Values.Cluster.rainbondImageRepository }}/rainbond:{{ .Values.Cluster.installVersion }}-allinone
+    image: {{ .Values.Cluster.rainbondImageRepository }}/rainbond:{{ .Values.Cluster.installVersion }}-admin-allinone
     {{- end }}
     imagePullPolicy: {{ .Values.Cluster.imagePullPolicy }}
     priorityComponent: false
-    replicas: 1
+    replicas: {{ .Values.Cluster.replicas }}
 {{- end }}
 
 - apiVersion: rainbond.io/v1alpha1
