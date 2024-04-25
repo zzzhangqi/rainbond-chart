@@ -20,14 +20,14 @@ rbac:
 ## Service account name and whether to create it
 serviceAccount:
   create: true
-  name: yx-operator
+  name: rainbond-operator
 
 # Use K3s Containerd
 useK3sContainerd: false
 
 # rainbondOperator
 operator:
-  name: yx-operator
+  name: appstore-operator
   # operator environment variable, ref: https://www.rainbond.com/docs/ops-guide/management/change-ports
   # env:
   # - name: API_PORT
